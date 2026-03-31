@@ -22,17 +22,14 @@ This plugin is a Cursor adaptation of the [openai/codex-plugin-cc](https://githu
 
 ## Install
 
-Clone or copy this plugin into a location Cursor can discover:
+Clone the repo and symlink (or copy) it into Cursor's local plugin directory:
 
 ```bash
-# Option 1: as a project-level plugin
-git clone https://github.com/whynpc9/codex-plugin-cursor.git /your-project/.cursor/plugins/codex
-
-# Option 2: as a user-level plugin
-git clone https://github.com/whynpc9/codex-plugin-cursor.git ~/.cursor/plugins/codex
+git clone https://github.com/whynpc9/codex-plugin-cursor.git
+ln -s "$(pwd)/codex-plugin-cursor" ~/.cursor/plugins/local/codex
 ```
 
-Then run `/codex:setup` in Cursor Agent to verify everything is ready.
+Then restart Cursor (or run **Developer: Reload Window**) and use `/codex:setup` in Cursor Agent to verify everything is ready.
 
 If Codex is not installed, the setup command will offer to install it for you. If Codex is installed but not authenticated, run:
 
