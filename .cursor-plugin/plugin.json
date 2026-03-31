@@ -1,0 +1,12 @@
+{
+  "name": "codex",
+  "description": "Use Codex from Cursor to review code or delegate tasks.",
+  "version": "0.1.0",
+  "author": {
+    "name": "OpenAI"
+  },
+  "homepage": "https://github.com/whynpc9/codex-plugin-cursor",
+  "repository": "https://github.com/whynpc9/codex-plugin-cursor",
+  "license": "Apache-2.0",
+  "keywords": ["codex", "review", "code-review", "openai"]
+}

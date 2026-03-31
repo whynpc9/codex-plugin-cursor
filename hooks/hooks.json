@@ -1,0 +1,25 @@
+{
+  "description": "Session lifecycle and optional stop-time review gate for the Codex plugin.",
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/session-lifecycle-hook.mjs\" sessionStart",
+        "timeout": 5
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/session-lifecycle-hook.mjs\" sessionEnd",
+        "timeout": 5
+      }
+    ],
+    "stop": [
+      {
+        "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/stop-review-gate-hook.mjs\"",
+        "timeout": 900,
+        "loop_limit": 1
+      }
+    ]
+  }
+}
