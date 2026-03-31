@@ -193,7 +193,7 @@ This plugin is adapted from [openai/codex-plugin-cc](https://github.com/openai/c
 | Manifest | `.claude-plugin/plugin.json` | `.cursor-plugin/plugin.json` |
 | Hook events | PascalCase (`SessionStart`) | camelCase (`sessionStart`) |
 | Session env vars | `CLAUDE_ENV_FILE` (file append) | `sessionStart` returns `{ env, additional_context }` |
-| Plugin root path | `CLAUDE_PLUGIN_ROOT` (built-in env var) | `additional_context` injects `export CODEX_PLUGIN_ROOT=...` |
+| Plugin root path | `CLAUDE_PLUGIN_ROOT` (built-in env var) | `sessionStart` creates launcher at `~/.cursor/codex-plugin/bin/` |
 | Hook script paths | `${CLAUDE_PLUGIN_ROOT}/scripts/...` | Relative paths `./scripts/...` |
 | Stop gate | `{ decision: "block" }` | `{ followup_message: "..." }` |
 | State directory | `CLAUDE_PLUGIN_DATA` | `CODEX_PLUGIN_DATA` (fallback `~/.cursor/codex-plugin/state/`) |

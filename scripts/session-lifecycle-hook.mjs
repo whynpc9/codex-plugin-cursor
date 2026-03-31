@@ -72,8 +72,27 @@ function cleanupSessionJobs(cwd, sessionId) {
   });
 }
 
+function createLauncher() {
+  const binDir = path.join(os.homedir(), ".cursor", "codex-plugin", "bin");
+  fs.mkdirSync(binDir, { recursive: true });
+  const launcherPath = path.join(binDir, "codex-companion");
+  const launcherContent = [
+    "#!/usr/bin/env bash",
+    `export CODEX_PLUGIN_ROOT="${PLUGIN_ROOT}"`,
+    `exec node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" "$@"`,
+    ""
+  ].join("\n");
+  fs.writeFileSync(launcherPath, launcherContent, { mode: 0o755 });
+}
+
 function handleSessionStart(input) {
   const pluginDataDir = path.join(os.homedir(), ".cursor", "codex-plugin", "data");
+
+  try {
+    createLauncher();
+  } catch (err) {
+    process.stderr.write(`Failed to create launcher: ${err.message}\n`);
+  }
 
   emitOutput({
     env: {
@@ -86,8 +105,8 @@ function handleSessionStart(input) {
       "",
       `CODEX_PLUGIN_ROOT="${PLUGIN_ROOT}"`,
       "",
-      "Before running any codex-companion.mjs command, export this variable:",
-      `export CODEX_PLUGIN_ROOT="${PLUGIN_ROOT}"`,
+      "To run codex-companion commands, use:",
+      "~/.cursor/codex-plugin/bin/codex-companion <command> [args...]",
       ""
     ].join("\n")
   });

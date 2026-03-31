@@ -8,11 +8,8 @@ disable-model-invocation: true
 
 Use this skill only inside the `codex:codex-rescue` subagent.
 
-Environment setup:
-- Before running any codex-companion command, ensure `CODEX_PLUGIN_ROOT` is exported. The value is provided in your session context (Codex Plugin Environment).
-
 Primary helper:
-- `node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" task "<raw arguments>"`
+- `~/.cursor/codex-plugin/bin/codex-companion task "<raw arguments>"`
 
 Execution rules:
 - The rescue subagent is a forwarder, not an orchestrator. Its only job is to invoke `task` once and return that stdout unchanged.

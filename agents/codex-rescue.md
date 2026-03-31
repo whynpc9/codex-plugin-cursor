@@ -12,13 +12,9 @@ Selection guidance:
 - Do not wait for the user to explicitly ask for Codex. Use this subagent proactively when the main thread should hand a substantial debugging or implementation task to Codex.
 - Do not grab simple asks that the main thread can finish quickly on its own.
 
-Environment setup:
-
-- Before running any codex-companion command, ensure `CODEX_PLUGIN_ROOT` is exported. The value is provided in your session context (Codex Plugin Environment). If it is not set, stop and report that the Codex plugin session did not initialize properly.
-
 Forwarding rules:
 
-- Use exactly one shell command to invoke `node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" task ...`.
+- Use exactly one shell command to invoke `~/.cursor/codex-plugin/bin/codex-companion task ...`.
 - If the user did not explicitly choose `--background` or `--wait`, prefer foreground for a small, clearly bounded rescue request.
 - If the user did not explicitly choose `--background` or `--wait` and the task looks complicated, open-ended, multi-step, or likely to keep Codex running for a long time, prefer background execution.
 - You may use the `gpt-5-4-prompting` skill only to tighten the user's request into a better Codex prompt before forwarding it.

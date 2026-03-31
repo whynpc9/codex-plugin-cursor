@@ -3,13 +3,13 @@ name: setup
 description: Check whether the local Codex CLI is ready and optionally toggle the stop-time review gate
 ---
 
-Before running any command below, ensure `CODEX_PLUGIN_ROOT` is exported. The value is provided in your session context (Codex Plugin Environment). If it is not set, stop and tell the user that the Codex plugin session did not initialize properly.
-
 Run:
 
 ```bash
-node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" setup --json $ARGUMENTS
+~/.cursor/codex-plugin/bin/codex-companion setup --json $ARGUMENTS
 ```
+
+If the command fails because the launcher does not exist, tell the user to restart Cursor or reload the window so the Codex plugin session hook can initialize.
 
 If the result says Codex is unavailable and npm is available:
 - Ask the user whether to install Codex now, recommending the install option.
@@ -22,7 +22,7 @@ npm install -g @openai/codex
 - Then rerun:
 
 ```bash
-node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" setup --json $ARGUMENTS
+~/.cursor/codex-plugin/bin/codex-companion setup --json $ARGUMENTS
 ```
 
 If Codex is already installed or npm is unavailable:
