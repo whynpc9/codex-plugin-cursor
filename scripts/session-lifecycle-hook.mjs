@@ -80,7 +80,16 @@ function handleSessionStart(input) {
       CODEX_PLUGIN_ROOT: PLUGIN_ROOT,
       [PLUGIN_DATA_ENV]: pluginDataDir,
       [SESSION_ID_ENV]: input.session_id ?? ""
-    }
+    },
+    additional_context: [
+      "## Codex Plugin Environment",
+      "",
+      `CODEX_PLUGIN_ROOT="${PLUGIN_ROOT}"`,
+      "",
+      "Before running any codex-companion.mjs command, export this variable:",
+      `export CODEX_PLUGIN_ROOT="${PLUGIN_ROOT}"`,
+      ""
+    ].join("\n")
   });
 }
 

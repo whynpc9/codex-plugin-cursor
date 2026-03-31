@@ -36,10 +36,12 @@ Argument handling:
 
 Supported arguments: `[--wait|--background] [--base <ref>] [--scope auto|working-tree|branch]`
 
+Before running any command below, ensure `CODEX_PLUGIN_ROOT` is exported. The value is provided in your session context (Codex Plugin Environment). If it is not set, stop and tell the user that the Codex plugin session did not initialize properly.
+
 Foreground flow:
 - Run:
 ```bash
-node "${CODEX_PLUGIN_ROOT}/scripts/codex-companion.mjs" review $ARGUMENTS
+node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" review $ARGUMENTS
 ```
 - Return the command stdout verbatim, exactly as-is.
 - Do not paraphrase, summarize, or add commentary before or after it.
@@ -48,6 +50,6 @@ node "${CODEX_PLUGIN_ROOT}/scripts/codex-companion.mjs" review $ARGUMENTS
 Background flow:
 - Launch the review in a background shell (with block_until_ms set to 0 or equivalent):
 ```bash
-node "${CODEX_PLUGIN_ROOT}/scripts/codex-companion.mjs" review $ARGUMENTS
+node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" review $ARGUMENTS
 ```
 - After launching the command, tell the user: "Codex review started in the background. Check `/codex:status` for progress."

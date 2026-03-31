@@ -3,9 +3,11 @@ name: result
 description: Show the stored final output for a finished Codex job in this repository
 ---
 
+Before running any command below, ensure `CODEX_PLUGIN_ROOT` is exported. The value is provided in your session context (Codex Plugin Environment). If it is not set, stop and tell the user that the Codex plugin session did not initialize properly.
+
 Run:
 ```bash
-node "${CODEX_PLUGIN_ROOT}/scripts/codex-companion.mjs" result $ARGUMENTS
+node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" result $ARGUMENTS
 ```
 
 Supported arguments: `[job-id]`
