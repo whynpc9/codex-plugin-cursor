@@ -5,7 +5,7 @@ description: Cancel an active background Codex job in this repository
 
 Run:
 ```bash
-~/.cursor/codex-plugin/bin/codex-companion cancel $ARGUMENTS
+node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" cancel $ARGUMENTS
 ```
 
 Supported arguments: `[job-id]`

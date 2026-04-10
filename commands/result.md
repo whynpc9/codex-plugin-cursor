@@ -5,7 +5,7 @@ description: Show the stored final output for a finished Codex job in this repos
 
 Run:
 ```bash
-~/.cursor/codex-plugin/bin/codex-companion result $ARGUMENTS
+node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" result $ARGUMENTS
 ```
 
 Supported arguments: `[job-id]`

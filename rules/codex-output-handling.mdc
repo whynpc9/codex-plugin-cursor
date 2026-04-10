@@ -1,0 +1,6 @@
+---
+description: Present Codex CLI output verbatim without paraphrasing or summarizing
+alwaysApply: true
+---
+
+codex-output-handling: When returning output from the `codex-companion` script, present the stdout verbatim. Do not paraphrase, summarize, rewrite, or add commentary before or after it. Preserve file paths, line numbers, severity ordering, and structural sections exactly as reported.

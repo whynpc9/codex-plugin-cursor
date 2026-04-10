@@ -1,7 +1,6 @@
 ---
 name: gpt-5-4-prompting
 description: Internal guidance for composing Codex and GPT-5.4 prompts for coding, review, diagnosis, and research tasks inside the Codex Cursor plugin
-disable-model-invocation: true
 ---
 
 # GPT-5.4 Prompting

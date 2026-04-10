@@ -157,6 +157,8 @@ The plugin includes an optional stop-time review gate. When enabled, the plugin 
 
 This plugin wraps the local Codex CLI and its app-server runtime. It does **not** call any API directly — all interaction goes through the `codex` binary installed on your machine.
 
+Cursor provides the `CURSOR_PLUGIN_ROOT` environment variable automatically, pointing to the plugin's installed root directory. All hooks, commands, and agent invocations use this variable to locate scripts.
+
 Key components:
 
 | Component | Description |
@@ -167,6 +169,7 @@ Key components:
 | `scripts/app-server-broker.mjs` | Shared broker that multiplexes one app-server across concurrent requests |
 | `scripts/session-lifecycle-hook.mjs` | `sessionStart` / `sessionEnd` hook — bootstraps env vars and cleans up on exit |
 | `scripts/stop-review-gate-hook.mjs` | `stop` hook — runs a targeted Codex review before allowing the agent to stop |
+| `rules/*.mdc` | Always-on rules for review output handling and policy enforcement |
 
 ## Codex Configuration
 
@@ -193,8 +196,8 @@ This plugin is adapted from [openai/codex-plugin-cc](https://github.com/openai/c
 | Manifest | `.claude-plugin/plugin.json` | `.cursor-plugin/plugin.json` |
 | Hook events | PascalCase (`SessionStart`) | camelCase (`sessionStart`) |
 | Session env vars | `CLAUDE_ENV_FILE` (file append) | `sessionStart` returns `{ env, additional_context }` |
-| Plugin root path | `CLAUDE_PLUGIN_ROOT` (built-in env var) | `sessionStart` creates launcher at `~/.cursor/codex-plugin/bin/` |
-| Hook script paths | `${CLAUDE_PLUGIN_ROOT}/scripts/...` | Relative paths `./scripts/...` |
+| Plugin root path | `CLAUDE_PLUGIN_ROOT` (built-in env var) | `CURSOR_PLUGIN_ROOT` (built-in env var) |
+| Hook script paths | `${CLAUDE_PLUGIN_ROOT}/scripts/...` | `${CURSOR_PLUGIN_ROOT}/scripts/...` |
 | Stop gate | `{ decision: "block" }` | `{ followup_message: "..." }` |
 | State directory | `CLAUDE_PLUGIN_DATA` | `CODEX_PLUGIN_DATA` (fallback `~/.cursor/codex-plugin/state/`) |
 | Command frontmatter | `allowed-tools`, `argument-hint`, etc. | `name` and `description` only |

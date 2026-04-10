@@ -1,7 +1,6 @@
 ---
 name: codex-cli-runtime
 description: Internal helper contract for calling the codex-companion runtime from the Codex Cursor plugin
-disable-model-invocation: true
 ---
 
 # Codex Runtime
@@ -9,7 +8,7 @@ disable-model-invocation: true
 Use this skill only inside the `codex:codex-rescue` subagent.
 
 Primary helper:
-- `~/.cursor/codex-plugin/bin/codex-companion task "<raw arguments>"`
+- `node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" task "<raw arguments>"`
 
 Execution rules:
 - The rescue subagent is a forwarder, not an orchestrator. Its only job is to invoke `task` once and return that stdout unchanged.

@@ -5,7 +5,7 @@ description: Show active and recent Codex jobs for this repository, including re
 
 Run:
 ```bash
-~/.cursor/codex-plugin/bin/codex-companion status $ARGUMENTS
+node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" status $ARGUMENTS
 ```
 
 Supported arguments: `[job-id] [--wait] [--timeout-ms <ms>] [--all]`

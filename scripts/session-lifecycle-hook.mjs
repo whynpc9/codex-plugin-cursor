@@ -4,7 +4,6 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import process from "node:process";
-import { fileURLToPath } from "node:url";
 
 import { terminateProcessTree } from "./lib/process.mjs";
 import { BROKER_ENDPOINT_ENV } from "./lib/app-server.mjs";
@@ -21,9 +20,6 @@ import { resolveWorkspaceRoot } from "./lib/workspace.mjs";
 
 export const SESSION_ID_ENV = "CODEX_COMPANION_SESSION_ID";
 const PLUGIN_DATA_ENV = "CODEX_PLUGIN_DATA";
-
-const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
-const PLUGIN_ROOT = path.resolve(SCRIPT_DIR, "..");
 
 function readHookInput() {
   const raw = fs.readFileSync(0, "utf8").trim();
@@ -72,41 +68,19 @@ function cleanupSessionJobs(cwd, sessionId) {
   });
 }
 
-function createLauncher() {
-  const binDir = path.join(os.homedir(), ".cursor", "codex-plugin", "bin");
-  fs.mkdirSync(binDir, { recursive: true });
-  const launcherPath = path.join(binDir, "codex-companion");
-  const launcherContent = [
-    "#!/usr/bin/env bash",
-    `export CODEX_PLUGIN_ROOT="${PLUGIN_ROOT}"`,
-    `exec node "$CODEX_PLUGIN_ROOT/scripts/codex-companion.mjs" "$@"`,
-    ""
-  ].join("\n");
-  fs.writeFileSync(launcherPath, launcherContent, { mode: 0o755 });
-}
-
 function handleSessionStart(input) {
   const pluginDataDir = path.join(os.homedir(), ".cursor", "codex-plugin", "data");
 
-  try {
-    createLauncher();
-  } catch (err) {
-    process.stderr.write(`Failed to create launcher: ${err.message}\n`);
-  }
-
   emitOutput({
     env: {
-      CODEX_PLUGIN_ROOT: PLUGIN_ROOT,
       [PLUGIN_DATA_ENV]: pluginDataDir,
       [SESSION_ID_ENV]: input.session_id ?? ""
     },
     additional_context: [
       "## Codex Plugin Environment",
       "",
-      `CODEX_PLUGIN_ROOT="${PLUGIN_ROOT}"`,
-      "",
       "To run codex-companion commands, use:",
-      "~/.cursor/codex-plugin/bin/codex-companion <command> [args...]",
+      `node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" <command> [args...]`,
       ""
     ].join("\n")
   });

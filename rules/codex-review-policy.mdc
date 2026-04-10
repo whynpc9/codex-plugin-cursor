@@ -1,0 +1,6 @@
+---
+description: After presenting Codex review findings, always ask the user before making any code changes
+alwaysApply: true
+---
+
+codex-review-policy: After presenting review findings from any `/codex:review` or `/codex:adversarial-review` output, STOP. Do not make code changes, apply patches, or fix issues. Explicitly ask the user which issues, if any, they want fixed before touching a single file.

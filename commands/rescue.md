@@ -21,7 +21,7 @@ Execution mode:
 - Otherwise, before starting Codex, check for a resumable rescue thread from this session by running:
 
 ```bash
-~/.cursor/codex-plugin/bin/codex-companion task-resume-candidate --json
+node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" task-resume-candidate --json
 ```
 
 - If that helper reports `available: true`, ask the user once whether to continue the current Codex thread or start a new one.
@@ -38,7 +38,7 @@ Supported arguments: `[--background|--wait] [--resume|--fresh] [--model <model|s
 
 Operating rules:
 
-- The subagent is a thin forwarder only. It should use one shell command to invoke `~/.cursor/codex-plugin/bin/codex-companion task ...` and return that command's stdout as-is.
+- The subagent is a thin forwarder only. It should use one shell command to invoke `node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" task ...` and return that command's stdout as-is.
 - Return the Codex companion stdout verbatim to the user.
 - Do not paraphrase, summarize, rewrite, or add commentary before or after it.
 - Do not ask the subagent to inspect files, monitor progress, poll `/codex:status`, fetch `/codex:result`, call `/codex:cancel`, summarize output, or do follow-up work of its own.

@@ -44,7 +44,7 @@ Supported arguments: `[--wait|--background] [--base <ref>] [--scope auto|working
 Foreground flow:
 - Run:
 ```bash
-~/.cursor/codex-plugin/bin/codex-companion adversarial-review $ARGUMENTS
+node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" adversarial-review $ARGUMENTS
 ```
 - Return the command stdout verbatim, exactly as-is.
 - Do not paraphrase, summarize, or add commentary before or after it.
@@ -53,6 +53,6 @@ Foreground flow:
 Background flow:
 - Launch the review in a background shell (with block_until_ms set to 0 or equivalent):
 ```bash
-~/.cursor/codex-plugin/bin/codex-companion adversarial-review $ARGUMENTS
+node "$CURSOR_PLUGIN_ROOT/scripts/codex-companion.mjs" adversarial-review $ARGUMENTS
 ```
 - After launching the command, tell the user: "Codex adversarial review started in the background. Check `/codex:status` for progress."

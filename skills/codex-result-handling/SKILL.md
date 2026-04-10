@@ -1,7 +1,6 @@
 ---
 name: codex-result-handling
 description: Internal guidance for presenting Codex helper output back to the user
-disable-model-invocation: true
 ---
 
 # Codex Result Handling
